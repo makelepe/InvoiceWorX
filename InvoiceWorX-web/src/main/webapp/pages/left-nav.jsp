@@ -1,5 +1,6 @@
 <%
-Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+
+    Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
 Boolean isSupplier = (Boolean) session.getAttribute("isSupplier");
 Boolean isFunder = (Boolean) session.getAttribute("isFunder");
 Boolean isBuyer = (Boolean) session.getAttribute("isBuyer");
