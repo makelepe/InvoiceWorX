@@ -1,39 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="za.co.invoiceworx.servlets.*"%>
-
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-
-<%
-    String errorMessage = (String) session.getAttribute("error_msg");
-    errorMessage = errorMessage == null ? "" : errorMessage;
-%>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
+   <head>
+       <title>Invoice WorX</title>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <head>
-        <meta charset="utf-8">
-        <title>Bootstrap Admin</title>
-        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
+       <link rel="stylesheet" href="css/login.css">    
+   </head>
 
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+   <body>
 
-        <script src="lib/jquery-1.11.1.min.js" type="text/javascript"></script>
+       <header>
+           <h1>Invoice <i><font style="color: #008dde">worX</font></i></h1>
+       </header>
 
+       <section class="loginform">
+           <form action="<%=request.getContextPath()%>/SecurityServlet" method="post" >
+               <p align="center">${sessionScope.success_msg}</p>
+               <input type="hidden" name="action" value="login"/>
+                   <p>
+                       <input type="text"
+                              required
+                              value=""
+                              name="emailAddress"
+                              placeholder="Username" required />
+                   </p>
+                   <p>
+                       <input type="password"
+                              required
+                              value="password"
+                              name="password"
+                              placeholder="Password" required />
+                   </p>
+                   <p>
+                       <a href="<%=request.getContextPath()%>/UserServlet?action=prepare-registration">Create a new account?</a>  &nbsp; | &nbsp;
+                       <a href="<%=request.getContextPath()%>/SecurityServlet?action=resetPassword">Forgot Password?</a>
+                   </p>
+                   <p>
+                       <input type="submit" value="Login" />
+                   </p>
+               
+           </form>
 
-
-        <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
-        <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
-
-    </head>
-    
-    <body>
-        
-    </body>
-    
+       </section>
+   </body>
 </html>

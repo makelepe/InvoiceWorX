@@ -13,7 +13,9 @@ public class ExceptionHandler {
     
     public static String handle (InvoiceWorXServiceException iwse) {
         ExCode exCode = iwse.getCode();
-
+//switch
+        
+        
         return exCode.getDesc();
     }
     

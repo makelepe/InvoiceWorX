@@ -1,84 +1,60 @@
 package za.co.invoiceworx.servlets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.EJB;
-import javax.servlet.annotation.WebServlet;
+import javax.inject.Inject;
+
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
+import za.co.invoiceworx.util.KnobContainer;
+import za.co.invoiceworx.ejb.InvoiceWorkflowEJB;
 import za.co.invoiceworx.ejb.SecurityEJB;
 import za.co.invoiceworx.entity.User;
 import za.co.invoiceworx.exception.InvoiceWorXServiceException;
+import za.co.invoiceworx.servlets.IXServlet.NextPage;
 
 /**
  *
  * @author F4657314
  */
+public class PaymentServlet extends IXServlet {
 
-public class SecurityServlet extends IXServlet {
+    private final Logger log = Logger.getLogger(IXServlet.class);
 
     @EJB
     private SecurityEJB securityEJB;
+
+    @EJB
+    private InvoiceWorkflowEJB invoiceWorkflowEJB;
 
     @Override
     protected void processRequest() {
         session.setAttribute("error_msg", "");
 
         if (action == null) {
-             session.setAttribute("error_msg", "Invalid state, Please try again.");
-            redirect("index.jsp");
+            session.setAttribute("error_msg", "Invalid state, Please try again.");
+            redirectToRequestor();
             return;
         }
 
-        if (action.equalsIgnoreCase("login")) {
-            String emailAddress = request.getParameter("Email Address");
-            String password = request.getParameter("password");
-            login(emailAddress, password);
+        if (action.equalsIgnoreCase("paynow")) {
+            redirect(NextPage.PAYNOW);
+        }
+
+        if (action.equalsIgnoreCase("confirmClientPayment")) {
+            redirect(NextPage.CONFIRM_CLIENT_SETTLEMENT);
+        }
+        
+        if (action.equalsIgnoreCase("confirmSupplierPayReceipt")) {
+            redirect(NextPage.CONFIRM_SUPPLIER_PAYMENT);
+        }
+        
+        if (action.equalsIgnoreCase("confirmFunderPayReceipt")) {
+            redirect(NextPage.CONFIRM_FUNDER_PAYMENT);
         }
     }
 
-    private void login(String emailAddress, String password) {
-        try {
-            if (StringUtils.isBlank(emailAddress) || StringUtils.isBlank(password)) {
-                session.setAttribute("error_msg", "Invalid input, please enter both email and password");
-                redirect("login.jsp");
-            }
-            
-            User user = securityEJB.login(emailAddress, password, session.getId());
-
-            if (user == null) {
-                session.setAttribute("loggedIn", Boolean.FALSE);
-                session.setAttribute("error_msg", "Login failed. Invalid username or password");
-                redirect("login.jsp");
-            }
-            session.setAttribute("user", user);
-            session.setAttribute("loggedIn", Boolean.TRUE);
-
-            redirect("pages/dashboard.jsp");
-
-        } catch (InvoiceWorXServiceException ex) {
-            session.setAttribute("email", null);
-            session.setAttribute("loggedIn", Boolean.FALSE);
-            session.setAttribute("error_msg", "Login failed. Invalid email or password");
-            redirect("login.jsp");
-        }
-    }
-
-    private void resetPassword(String email, String oldPassword, String newPassword) {
-        try {
-            Boolean success = securityEJB.changePassword(email, oldPassword, newPassword);
-
-            if (!success) {
-                session.setAttribute("password_reset_success", Boolean.FALSE);
-                session.setAttribute("error_msg", "There was an error reseting password. Please try again later.");
-                redirect("forgot-password.jsp");
-            }
-            
-            session.setAttribute("success_msg", "Your temporary password has been sent to xx**@**.com. Please use link in your email to reset your password..");
-            redirect("pages/dashboard.jsp");
-
-        } catch (InvoiceWorXServiceException ex) {
-            session.setAttribute("password_reset_success", Boolean.FALSE);
-            session.setAttribute("error_msg", "There was an error reseting password. Please try again later.");
-            redirect("forgot-password.jsp");
-        }
-    }
-
-}
+   }
