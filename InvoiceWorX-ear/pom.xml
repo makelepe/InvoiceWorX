@@ -18,7 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <build>
+   <!-- <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -41,7 +41,8 @@
            
 
         </plugins>
-    </build>
+    </build>-->
+    
     <dependencies>
         <dependency>
             <groupId>com.invoice.worx</groupId>
@@ -56,4 +57,85 @@
             <type>war</type>
         </dependency>
     </dependencies>
+    
+    <build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+	
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*</include>
+					<include>**/*.png</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.png</include>
+					<include>**/*.js</include>
+					<include>**/*.xml</include>
+					<include>**/*.pdf	</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		
+		          <plugins>
+                        <plugin>
+                                <inherited>true</inherited>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-compiler-plugin</artifactId>
+                                <version>3.0</version>
+                                <configuration>
+                                        <source>1.7</source>
+                                        <target>1.7</target>
+                                        <optimise>true</optimise>
+                                        <debug>true</debug>
+                                </configuration>
+                        </plugin>
+                        <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-ejb-plugin</artifactId>
+                                <version>2.3</version>
+                                <configuration>
+                                        <ejbVersion>3.0</ejbVersion>
+                                        <generateClient>true</generateClient>
+                                </configuration>
+                        </plugin>
+
+                        <plugin>
+                                <artifactId>maven-ear-plugin</artifactId>
+                               
+                                <configuration>
+                                        <generateApplicationXml>true</generateApplicationXml>
+                                        <defaultLibBundleDir>lib</defaultLibBundleDir>
+                                        <modules>
+
+                                                <ejbModule>
+                                                        <groupId>com.invoice.worx</groupId>
+														<artifactId>InvoiceWorX-ejb</artifactId>
+                                                </ejbModule>
+
+                                                <webModule>
+                                                        <groupId>com.invoice.worx</groupId>
+														<artifactId>InvoiceWorX-web</artifactId>
+                                                        <contextRoot>/invoiceworx</contextRoot>
+                                                </webModule>
+                                        </modules>
+                                </configuration>
+                               
+                        </plugin>
+
+                </plugins>
+
+	</build>
 </project>

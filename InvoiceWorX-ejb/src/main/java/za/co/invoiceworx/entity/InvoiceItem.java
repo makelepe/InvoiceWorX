@@ -3,7 +3,8 @@ package za.co.invoiceworx.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Basic;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +17,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -38,7 +41,6 @@ public class InvoiceItem implements Serializable {
     @Size(max = 200)
     @Column(name = "description")
     private String description;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
     @Column(name = "quantity")
@@ -48,6 +50,9 @@ public class InvoiceItem implements Serializable {
     @JoinColumn(name = "invoice_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Invoice invoice;
+    @Column(name = "line_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lineDate;
 
     public InvoiceItem() {
     }
@@ -104,7 +109,17 @@ public class InvoiceItem implements Serializable {
         this.invoice = invoice;
     }
 
-    @Override
+    
+    
+    public Date getLineDate() {
+		return lineDate;
+	}
+
+	public void setLineDate(Date lineDate) {
+		this.lineDate = lineDate;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);

@@ -83,7 +83,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User getUser(Long userId) throws InvoiceWorXServiceException {
         try {
-            String query = "select u from " + User.class.getName() + " u where u.id = ?1";
+            String query = "select u from " + User.class.getName() + " u where u.id = ?1 and u.active=true";
 
             List<Object> params = new ArrayList();
             params.add(userId);
@@ -98,7 +98,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findUser(String username) throws InvoiceWorXServiceException {
         try {
-            String query = "select u from " + User.class.getName() + " u where u.username = ?1";
+            String query = "select u from " + User.class.getName() + " u where u.username = ?1 and u.active=true";
 
             List<Object> params = new ArrayList();
             params.add(username);
@@ -106,6 +106,21 @@ public class UserRepositoryImpl implements UserRepository {
 
         } catch (NoResultException ne) {
             log.error("Cannot find user (for Username = " + username + ")");
+            return null;
+        }
+    }
+
+    @Override
+    public List<User> findUsers(UserType userType) throws InvoiceWorXServiceException {
+        try {
+            String query = "select u from " + User.class.getName() + " u where u.userType = ?1 and u.active=true";
+
+            List<Object> params = new ArrayList();
+            params.add(userType);
+            return (List<User>) jpa.readList(query, params);
+
+        } catch (NoResultException ne) {
+            log.error("Cannot find user (for user role = " + userType.getRole() + ")");
             return null;
         }
     }
@@ -129,7 +144,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findUserToReset(String username, String email) throws InvoiceWorXServiceException {
         try {
-            String query = "select u from " + User.class.getName() + " u where u.username = ?1 and u.person.contact.emailAddress = ?2 and u.active";
+            String query = "select u from " + User.class.getName() + " u where u.username = ?1 and u.person.contact.emailAddress = ?2 and u.active=true";
 
             List<Object> params = new ArrayList();
             params.add(username);

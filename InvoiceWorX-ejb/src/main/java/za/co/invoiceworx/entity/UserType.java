@@ -22,7 +22,7 @@ public class UserType implements Serializable {
     public static final String SYSTEM = "SYSTEM";
     public static final String ADMIN = "ADMIN";
     public static final String SUPPLIER = "SUPPLIER";
-    public static final String BUYER = "BUYER";
+    public static final String CLIENT = "CLIENT";
     public static final String FUNDER = "FUNDER";
     
     

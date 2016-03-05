@@ -120,9 +120,14 @@ public class Account implements Serializable {
         return !((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id)));
     }
 
-    @Override
-    public String toString() {
-        return "za.co.invoiceworx.entity.Menu[ id=" + getId() + " ]";
-    }
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", accountHolder=" + accountHolder
+				+ ", accountType=" + accountType + ", accountNumber="
+				+ accountNumber + ", bank=" + bank + ", branch=" + branch
+				+ ", branchCode=" + branchCode + "]";
+	}
+
+ 
     
 }

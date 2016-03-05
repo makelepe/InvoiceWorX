@@ -54,7 +54,7 @@ public class InvoiceRepositoryImpl implements InvoiceRepository {
             if (userType.equalsIgnoreCase(UserType.SUPPLIER)) {
                 query += " and i.createdBy = ?2";
 
-            } else if (userType.equalsIgnoreCase(UserType.BUYER)) {
+            } else if (userType.equalsIgnoreCase(UserType.CLIENT)) {
                 query += " and i.approvedBy = ?2";
 
             } else if (userType.equalsIgnoreCase(UserType.FUNDER)) {

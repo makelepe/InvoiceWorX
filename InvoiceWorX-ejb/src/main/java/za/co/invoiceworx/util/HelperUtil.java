@@ -27,9 +27,9 @@ public class HelperUtil {
         tran.setTranAmount(tranAmount);
         tran.setUser(user);
 
-        String sVAT = String.valueOf(cache.get(CacheConstant.VAT_PERCENTAGE));
+        /*String sVAT = String.valueOf(cache.get(CacheConstant.VAT_PERCENTAGE));
         BigDecimal vatPercentage = (sVAT == null || sVAT.equalsIgnoreCase("")) ? new BigDecimal(0.00) : new BigDecimal(Double.valueOf(sVAT));
-        tran.setTranVatAmount(vatPercentage.multiply(tranAmount));
+        tran.setTranVatAmount(vatPercentage.multiply(tranAmount));*/
 
         TransactionStatus status = new TransactionStatus();
         status.setCreatedBy(user);
@@ -50,6 +50,7 @@ public class HelperUtil {
         status.setInvoiceStatusType(cache.getInvoiceStatusType(statusType));
         inv.setCurrentStatusType(status.getInvoiceStatusType());
         inv.addStatus(status);
+        inv.setInvStatus(statusType);
         
     }
 

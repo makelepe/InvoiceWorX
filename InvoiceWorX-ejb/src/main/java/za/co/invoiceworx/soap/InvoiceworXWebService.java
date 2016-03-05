@@ -1,5 +1,6 @@
 package za.co.invoiceworx.soap;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -53,5 +54,11 @@ public class InvoiceworXWebService {
         
         return securityEJB.login(username, password, sessionId);
     }
+    
+    public List<User> getBuyers() throws InvoiceWorXServiceException {
+        return userEJB.findAllClients();
+    }
+    
+    
 
 }

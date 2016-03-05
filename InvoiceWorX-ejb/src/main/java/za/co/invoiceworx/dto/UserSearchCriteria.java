@@ -1,58 +1,20 @@
 
 package za.co.invoiceworx.dto;
 
-import java.util.Date;
-
 /**
  *
  * @author F4657314
  */
 public class UserSearchCriteria {
     
-    private Long id;
-    private String invoiceRef;
-    private Date from;
-    private Date to;
     private String firstName;
-    private String secondName;
-    private String surname;
-    private Long idNumber;
-
-    private Boolean searchByCreator;
-    private Boolean searchByApprover;
-    private Boolean searchByFunder;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getInvoiceRef() {
-        return invoiceRef;
-    }
-
-    public void setInvoiceRef(String invoiceRef) {
-        this.invoiceRef = invoiceRef;
-    }
-
-    public Date getFrom() {
-        return from;
-    }
-
-    public void setFrom(Date from) {
-        this.from = from;
-    }
-
-    public Date getTo() {
-        return to;
-    }
-
-    public void setTo(Date to) {
-        this.to = to;
-    }
+    private String lastName;
+    private String username;
+    private String idNumber;
+    private String userType;
+    private String emailAddress;
+    private String cellphone;
+    private String organizationName;
 
     public String getFirstName() {
         return firstName;
@@ -62,54 +24,61 @@ public class UserSearchCriteria {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Long getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
-    public void setIdNumber(Long idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
-    public Boolean getSearchByCreator() {
-        return searchByCreator;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setSearchByCreator(Boolean searchByCreator) {
-        this.searchByCreator = searchByCreator;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
-    public Boolean getSearchByApprover() {
-        return searchByApprover;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setSearchByApprover(Boolean searchByApprover) {
-        this.searchByApprover = searchByApprover;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
-    public Boolean getSearchByFunder() {
-        return searchByFunder;
+    public String getCellphone() {
+        return cellphone;
     }
 
-    public void setSearchByFunder(Boolean searchByFunder) {
-        this.searchByFunder = searchByFunder;
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
     }
 
-    
-    
+    public String getOrganizationName() {
+        return organizationName;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
+    }
+
+   
 }

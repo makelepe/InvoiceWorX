@@ -46,4 +46,6 @@ public interface UserRepository  extends IRepository{
     
     public User getUser(Long userId) throws InvoiceWorXServiceException;
     
+    public List<User> findUsers(UserType userType) throws InvoiceWorXServiceException;
+    
 }

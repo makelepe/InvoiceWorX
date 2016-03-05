@@ -1,4 +1,4 @@
-package za.co.fnb.paypal.africa.qualifier;
+package za.co.invoiceworx.qualifier;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;

@@ -25,14 +25,8 @@ public class InvoiceStatusType implements Serializable {
     public static final String SOLD = "SOLD";
     public static final String FUNDER_PAYMENT_CONFIRMED = "FUNDER_PAYMENT_CONFIRMED";
     public static final String SETTLED = "SETTLED";
-    public static final String AWAITING_PAYMENT = "AWAITING_PAYMENT";
     public static final String ERROR = "ERROR";
     
-    public static final String SUPPLIER_PAID_INIT_AMT = "SUPPLIER_PAID_INIT_AMT";
-    public static final String PLATFORM_FEE_PAID = "PLATFORM_FEE_PAID";
-    public static final String SUPPLIER_PAYMENT_CONFIRMED = "SUPPLIER_PAYMENT_CONFIRMED";
-    public static final String BUYER_SETTLED = "BUYER_SETTLED";
-    public static final String FUNDER_PAID = "FUNDER_PAID";
     
     @Id
     @Basic(optional = false)

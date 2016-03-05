@@ -80,8 +80,8 @@ public class User implements Serializable {
         return (this.getUserType()!= null) && (this.getUserType().getRole().equalsIgnoreCase(UserType.FUNDER));
     }
 
-    public Boolean isBuyer() {
-        return (this.getUserType()!= null) && (this.getUserType().getRole().equalsIgnoreCase(UserType.BUYER));
+    public Boolean isClient() {
+        return (this.getUserType()!= null) && (this.getUserType().getRole().equalsIgnoreCase(UserType.CLIENT));
     }
 
     public User() {
@@ -191,10 +191,8 @@ public class User implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "za.co.invoiceworx.entity.User[ id=" + id + " ]";
-    }
+    
+
 
     /**
      * @return the userType
@@ -217,5 +215,16 @@ public class User implements Serializable {
     public void setAccount(Account account) {
         this.account = account;
     }
+    
+    
+
+    @Override
+	public String toString() {
+		return "User [id=" + id +", createdTs=" + createdTs + ", expiryTs="
+				+ expiryTs + ", lastPasswordChangedTs=" + lastPasswordChangedTs
+				+ ", active=" + active + ", deactivationReason="
+				+ deactivationReason + ", userType=" + userType + ", org="
+				+ org + ", person=" + person + ", account=" + account + "]";
+	}
 
 }

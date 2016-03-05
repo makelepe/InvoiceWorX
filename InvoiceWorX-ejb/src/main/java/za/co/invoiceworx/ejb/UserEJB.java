@@ -6,13 +6,14 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import za.co.invoiceworx.util.Cache;
 import za.co.invoiceworx.util.DateUtil;
-import za.co.invoiceworx.util.Notifier;
 import za.co.invoiceworx.dto.UserSearchCriteria;
 import za.co.invoiceworx.entity.User;
 import za.co.invoiceworx.entity.UserType;
 import za.co.invoiceworx.exception.ExCode;
 import za.co.invoiceworx.exception.InvoiceWorXServiceException;
 import za.co.invoiceworx.repository.UserRepository;
+import za.co.invoiceworx.util.Cache;
+import za.co.invoiceworx.util.Notifier;
 
 /**
  *
@@ -68,6 +69,18 @@ public class UserEJB {
         return userRepo.getUser(userId);
     }
 
+    public List<User> findAllClients() throws InvoiceWorXServiceException {
+        return userRepo.findUsers(cache.getUserType(UserType.CLIENT));
+    }
+
+    public List<User> findAllFunders() throws InvoiceWorXServiceException {
+        return userRepo.findUsers(cache.getUserType(UserType.FUNDER));
+    }
+
+    public List<User> findAllSuppliers() throws InvoiceWorXServiceException {
+        return userRepo.findUsers(cache.getUserType(UserType.SUPPLIER));
+    }
+
     public List<User> search(UserSearchCriteria searchCriteria) {
         return null;
     }
@@ -114,7 +127,7 @@ public class UserEJB {
             throw new InvoiceWorXServiceException(ExCode.UNKNOWN, "User[with username = " + user.getUsername() + "] not found ");
         }
 
-        notifier.sendEmail(subject, body, new String[]{_user.getPerson().getContact().getEmail()});
+        notifier.sendEmail(subject, body, _user.getPerson().getContact().getEmail());
     }
 
     public void sendUserNotificationSMS(User user, String body) throws InvoiceWorXServiceException {

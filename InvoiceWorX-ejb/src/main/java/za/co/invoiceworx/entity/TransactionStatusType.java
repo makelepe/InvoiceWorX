@@ -17,13 +17,11 @@ import javax.validation.constraints.Size;
 @Table(name = "transaction_status_type")
 public class TransactionStatusType implements Serializable {
 
-    public static final String FUNDER_IN_PAYMENT = "FUNDER_IN_PAYMENT";
-    public static final String SUPPLIER_OUT_PAYMENT = "SUPPLIER_OUT_PAYMENT";
-    public static final String BUYER_SETTLED = "BUYER_SETTLED";
-    public static final String SETTLED = "SETTLED";
+    public static final String BUY_INVOICE = "BUY_INVOICE";
+    public static final String CONFIRM_CLIENT_SETTLEMENT = "CONFIRM_CLIENT_SETTLEMENT";
+    public static final String CONFIRM_FUNDER_PAYMENT_RECEIPT = "CONFIRM_FUNDER_PAYMENT_RECEIPT";
+    public static final String CONFIRM_SUPPLIER_PAYMENT_RECEIPT = "CONFIRM_SUPPLIER_PAYMENT_RECEIPT";
     public static final String ERROR = "ERROR";
-    public static final String FUNDER_OUT_PAYMENT = "FUNDER_OUT_PAYMENT";
-    public static final String PLATFORM_COMM_OUT_PAYMENT = "PLATFORM_COMM_OUT_PAYMENT";
     
 
     private static final long serialVersionUID = 1L;

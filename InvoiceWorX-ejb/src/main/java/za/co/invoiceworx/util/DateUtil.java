@@ -27,6 +27,18 @@ public class DateUtil {
         }
     }
     
+    public static Integer calculateDifferenceInDays (Date from, Date to) {
+        
+        if (from == null || to == null) {
+            return 0;
+        }
+        
+        if (from.after(to)) {
+            return 0;
+        }
+        return Long.valueOf((to.getTime() - from.getTime()) / (24 * 60 * 60 * 1000)).intValue();
+    }
+    
     public static int getNumberOfMonths (Date from, Date to) {
         Calendar fromCal = Calendar.getInstance();
         fromCal.setTime(from);

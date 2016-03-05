@@ -113,11 +113,19 @@ public class Cache {
 
     public InvoiceStatusType getInvoiceStatusType(String type) {
         for (InvoiceStatusType statusType : invoiceStatusTypes) {
+        	if (statusType.getInvtype() == null) {
+        		continue;
+        	}
+        	
             if (statusType.getInvtype().equalsIgnoreCase(type)) {
                 return statusType;
             }
         }
         return null;
+    }
+    
+    public List<InvoiceStatusType> getInvoiceStatusTypes() {
+        return invoiceStatusTypes;
     }
 
     public TransactionStatusType getTransactionStatusType(String type) {

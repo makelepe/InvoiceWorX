@@ -1,23 +1,22 @@
 package za.co.invoiceworx.connector;
 
 import java.math.BigDecimal;
+
 import za.co.invoiceworx.entity.Account;
 import za.co.invoiceworx.entity.Invoice;
+import za.co.invoiceworx.entity.User;
 
 /**
  *
  * @author F4657314
  */
 public class SageConnector {
+	
+	public String debitFunderAndPaySupplier (User funder, User supplier, BigDecimal amount) {
+		return null;
+	}
     
-    public String requestPaymentInstruction (Account fromAccount, Account toAccount, BigDecimal amount) {
-        // request payment to be made from Funder's account into Invoice WorX sage account
-        // The amount of [80% of total invoice value]
-        //invoice.setFundedAmount(fundedAmount);
-        
-        return null;
-    }
-    
+   
     public String pay (Account fromAccount, Account toAccount, BigDecimal tranAmount) {
         // pay supplier 78% of total invoice.
         

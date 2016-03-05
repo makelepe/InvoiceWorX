@@ -59,7 +59,7 @@ class JPARepositoryImpl<T> implements JPARepository<T> {
 
     @Override
     public T add(T object) {
-        em.persist(object);
+        em.merge(object);
 
         return object;
     }

@@ -3,7 +3,8 @@ package za.co.invoiceworx.util;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import za.co.fnb.paypal.africa.qualifier.InvoiceWorxDS;
+
+import za.co.invoiceworx.qualifier.InvoiceWorxDS;
 
 
 /**

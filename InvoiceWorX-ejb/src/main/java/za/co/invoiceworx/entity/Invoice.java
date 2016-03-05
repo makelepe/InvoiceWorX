@@ -97,7 +97,7 @@ public class Invoice implements Serializable {
 
     @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<InvoiceDocumentFile> docFiles;
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<InvoiceItem> invoiceItems;
     @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<InvoiceStatus> invoiceStatusses;
@@ -163,9 +163,6 @@ public class Invoice implements Serializable {
         invoiceStatusses.add(status);
     }
 
-    public Boolean isApproved() {
-        return this.getApprovedTs() != null;
-    }
 
     public Boolean isOwnsBy(User supplier) {
         if (supplier == null) {
@@ -178,12 +175,20 @@ public class Invoice implements Serializable {
         return (this.getCurrentStatusType() != null) && (this.getCurrentStatusType().getInvtype().equalsIgnoreCase(InvoiceStatusType.NEW));
     }
 
+    public Boolean isApproved() {
+        return (this.getCurrentStatusType() != null) && (this.getCurrentStatusType().getInvtype().equalsIgnoreCase(InvoiceStatusType.APPROVED));
+    }
+
+    public Boolean isPendingVerification() {
+        return (this.getCurrentStatusType() != null) && (this.getCurrentStatusType().getInvtype().equalsIgnoreCase(InvoiceStatusType.PENDING_VERIFICATION));
+    }
+
     public Boolean isOnSale() {
         return (this.getCurrentStatusType() != null) && (this.getCurrentStatusType().getInvtype().equalsIgnoreCase(InvoiceStatusType.ON_SALE));
     }
 
-    public Boolean isPendingVerification() {
-        return (this.getCurrentStatusType() != null) && (this.getCurrentStatusType().getInvtype().equalsIgnoreCase(InvoiceStatusType.ON_SALE));
+    public Boolean isSold() {
+        return (this.getCurrentStatusType() != null) && (this.getCurrentStatusType().getInvtype().equalsIgnoreCase(InvoiceStatusType.SOLD));
     }
 
     public Invoice() {

@@ -96,9 +96,9 @@ public class SecurityEJB {
 
         userRepo.updateUser(user);
 
-        notifier.sendEmail("Your InvoiceWorX password has been changed",
-                "Hi, ",
-                new String[]{user.getPerson().getContact().getEmail()});
+        notifier.sendEmail("Your InvoiceWorX password has been changed", "Your InvoiceWorX password has been changed",
+                user.getPerson().getContact().getEmail());
+
 
         return true;
     }
@@ -116,7 +116,7 @@ public class SecurityEJB {
 
         notifier.sendEmail("Your InvoiceWorX password has been reset",
                 "Hi " + user.getPerson().getFname() + ", This is your temporary password : " + user.getPassword() + ". Please change your password asap. Thanks",
-                new String[]{user.getPerson().getContact().getEmail()});
+                user.getPerson().getContact().getEmail());
 
     }
 
