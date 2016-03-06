@@ -101,7 +101,10 @@
         </li>
         <li>
             <ul class="accounts-menu nav nav-list collapse">
-               <li ><a href="<%=request.getContextPath()%>/UserServlet?action=prepare-maintainProfile"><span class="fa fa-caret-right"></span> Maintain profile</a></li>
+                <c:if test="${sessionScope.isAdmin}">
+                    <li ><a href="<%=request.getContextPath()%>/UserServlet?action=viewPrincipalUser"><span class="fa fa-caret-right"></span> Maintain profile</a></li>
+                </c:if> 
+               <li ><a href="<%=request.getContextPath()%>/UserServlet?action=viewPrincipalUser"><span class="fa fa-caret-right"></span> Maintain profile</a></li>
                 <li ><a href="<%=request.getContextPath()%>/SecurityServlet?action=resetPassword"><span class="fa fa-caret-right"></span> Reset Password</a></li>
             </ul>
         </li>

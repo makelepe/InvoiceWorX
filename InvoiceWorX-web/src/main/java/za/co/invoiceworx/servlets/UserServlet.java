@@ -28,7 +28,7 @@ public class UserServlet extends IXServlet {
     private UserEJB userEJB;
 
     @Override
-    protected void processRequest() {
+    protected void processRequest() throws InvoiceWorXServiceException{
         session.setAttribute("error_msg", "");
 
         if (action == null) {
@@ -67,6 +67,15 @@ public class UserServlet extends IXServlet {
             redirect(NextPage.LIST_USERS);
         }
 
+        if (action.equalsIgnoreCase("viewUser")) {
+            viewUser();
+            redirect(NextPage.MAINTAIN_PROFILE);
+        }
+
+        if (action.equalsIgnoreCase("viewPrincipalUser")) {
+            session.setAttribute("selectedUser", getPrincipalUser());
+            redirect(NextPage.MAINTAIN_PROFILE);
+        }
     }
 
     private void register(HttpServletRequest request, String msg, boolean signUp) {
@@ -211,7 +220,7 @@ public class UserServlet extends IXServlet {
     public void viewUser() throws InvoiceWorXServiceException {
         Long userId = Long.valueOf(request.getParameter("userId"));
         User user = userEJB.getUser(userId);
-
+        session.setAttribute("selectedUser", user);
     }
 
 }

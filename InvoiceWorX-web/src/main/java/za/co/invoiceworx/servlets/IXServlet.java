@@ -1,6 +1,8 @@
 package za.co.invoiceworx.servlets;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import javax.inject.Inject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import za.co.invoiceworx.common.ExceptionHandler;
 
 import za.co.invoiceworx.entity.User;
+import za.co.invoiceworx.exception.InvoiceWorXServiceException;
 
 /**
  *
@@ -25,27 +29,41 @@ public abstract class IXServlet extends HttpServlet {
     protected HttpSession session;
     protected String action;
 
+    @Inject
+    private ExceptionHandler handler;
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        request = req;
-        response = res;
-        action = request.getParameter("action");
-        session = request.getSession();
-        log.info("Action = " + action);
+        try {
+            request = req;
+            response = res;
+            action = request.getParameter("action");
+            session = request.getSession();
+            log.info("Action = " + action);
+            log.info("Servlet path = " + request.getServletPath());
 
-        processRequest();
+            processRequest();
+        } catch (InvoiceWorXServiceException ex) {
+            handler.handle(session, ex);
+        }
     }
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        request = req;
-        response = res;
-        action = request.getParameter("action");
-        session = request.getSession();
+        try {
+            request = req;
+            response = res;
+            action = request.getParameter("action");
+            session = request.getSession();
+            log.info("Action = " + action);
+            log.info("Servlet path = " + request.getServletPath());
 
-        processRequest();
+            processRequest();
+        } catch (InvoiceWorXServiceException ex) {
+            handler.handle(session,ex);
+        }
     }
 
     protected void redirectToRequestor() {
@@ -77,6 +95,7 @@ public abstract class IXServlet extends HttpServlet {
             session.setAttribute("username", null);
             session.setAttribute("loggedIn", Boolean.FALSE);
             session.setAttribute("error_msg", "Error redirecting to : " + page.getPageName());
+            
         }
     }
 
@@ -133,11 +152,11 @@ public abstract class IXServlet extends HttpServlet {
         }
         session.setAttribute(nextPage.getPageName(), true);
     }
-    
-	public User getPrincipalUser() {
-		User user = (User) session.getAttribute("user");
-		return user;
-	}
 
-    protected abstract void processRequest();
+    public User getPrincipalUser() {
+        User user = (User) session.getAttribute("user");
+        return user;
+    }
+
+    protected abstract void processRequest() throws InvoiceWorXServiceException;
 }

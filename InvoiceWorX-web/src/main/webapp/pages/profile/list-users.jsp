@@ -15,6 +15,8 @@
                         <th>Last Name</th>
                         <th>Organization Name</th>
                         <th>Email Address</th>
+                        <th>Cellphone</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,29 +25,26 @@
 
                         <tr>
                             <td>
-                                <input type="text" id="firstName" name="firstName" value="${usr.getPerson().getFname()}" class="form-control span12">
+                                <input type="text" id="firstName" name="firstName" value="${usr.getPerson().getFname()}" class="form-control span12" readonly/>
                             </td>
                             <td>
-                                <input type="text" id="secondName" name="secondName" value="${usr.getPerson().getMname()}" class="form-control span12"/>
+                                <input type="text" id="secondName" name="secondName" value="${usr.getPerson().getMname()}" class="form-control span12" readonly/>
                             </td>
                             <td>
-                                <input type="text" id="lastName" name="lastName" value="${usr.getPerson().getLname()}" class="form-control span12"/>
+                                <input type="text" id="lastName" name="lastName" value="${usr.getPerson().getLname()}" class="form-control span12" readonly/>
                             </td>
                             <td>
-                                <input type="text" id="orgName" name="orgName" value="${usr.getOrg().getOrgName()}" class="form-control span12"/>
+                                <input type="text" id="orgName" name="orgName" value="${usr.getOrg().getOrgName()}" class="form-control span12" readonly/>
                             </td>
                             <td>
-                                <input type="text" id="emailAddress" name="emailAddress" value="${usr.getPerson().getContact().getEmail()}" class="form-control span12"/>
+                                <input type="text" id="emailAddress" name="emailAddress" value="${usr.getPerson().getContact().getEmail()}" class="form-control span12" readonly/>
                             </td>
                             <td>
-                                <input type="text" id="cellphone" name="cellphone" value="${usr.getPerson().getContact().getCellphone()}" class="form-control span12"/>
+                                <input type="text" id="cellphone" name="cellphone" value="${usr.getPerson().getContact().getCellphone()}" class="form-control span12" readonly/>
                             </td>
                             <td>
                                 <input type="hidden" name="action" value="prepare-maintainProfile" />
-                                <a href="<%=request.getContextPath()%>/UserServlet?action=viewUser&userId=${item.getId()}">maintain</a>
-                            </td>
-                            <td>
-                                <div class="clearfix"></div>
+                                <a href="<%=request.getContextPath()%>/UserServlet?action=viewUser&userId=${usr.getId()}">view</a>
                             </td>
                         </tr>
                     </c:forEach>
